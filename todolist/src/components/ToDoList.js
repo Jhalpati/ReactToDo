@@ -1,24 +1,29 @@
 import React, { useState } from 'react';
+import TodoForm from './ToDoForm';
 
+function ToDoList(){
+const [todos, setTodos] = useState([]);
 
+const addTodo = todo => {
+    if(!todo.text || /^\s*$/.test(todo.text)) {
+        return
+    }
 
-function ToDoForm(){
-    const [input, setInput] = useState('');
+const newTodos = [todo, ...todos];
 
-    return(
-        <form className='todo-form'>
-            <input
-                type='text'
-                placeholder="Add a ToDo"
-                value={input}
-                name='text'
-                className='to-do input'/>
-                <button className="todo-button">Add todo</button>    
-        </form>
-
-
-    );
+setTodos(newTodos);
+console.log(...todos);
 
 }
 
-export default ToDoForm;
+    return(
+        <div>
+            <h1>Plan for today</h1>
+            <TodoForm onSubmit={addTodo}/>
+        </div>
+    )
+
+
+}
+
+export default ToDoList;
